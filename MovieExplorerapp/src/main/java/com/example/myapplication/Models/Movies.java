@@ -1,77 +1,28 @@
 package com.example.myapplication.Models;
 
-import java.util.List;
-
 public class Movies {
-    private boolean adult;
-    private String backdropPath;
-    private List<Integer> genreIds;
+    // initialize the movie details based on how the json is formatted
     private int id;
-    private String originalLanguage;
-    private String originalTitle;
-    private String overview;
     private double popularity;
-    private String posterPath;
-    private String releaseDate;
+    private String poster_path;
+    private String release_date;
     private String title;
-    private boolean video;
-    private double voteAverage;
-    private int voteCount;
+    private double vote_average;
 
-    public boolean isAdult() {
-        return adult;
-    }
+    private int vote_count;
 
-    public void setAdult(boolean adult) {
-        this.adult = adult;
-    }
-
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-    }
-
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
+    public Movies(int id, double popularity, String poster_path, String release_date, String title, double voteAverage, int voteCount) {
+        this.id = id;
+        this.popularity = popularity;
+        this.poster_path = poster_path;
+        this.release_date = release_date;
+        this.title = title;
+        this.vote_average = voteAverage;
+        this.vote_count = voteCount;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
-
-    public String getOverview() {
-        return overview;
-    }
-
-    public void setOverview(String overview) {
-        this.overview = overview;
     }
 
     public double getPopularity() {
@@ -82,20 +33,20 @@ public class Movies {
         this.popularity = popularity;
     }
 
-    public String getPosterPath() {
-        return posterPath;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     public String getTitle() {
@@ -106,27 +57,22 @@ public class Movies {
         this.title = title;
     }
 
-    public boolean isVideo() {
-        return video;
+
+    public double getVote_average() {
+        return vote_average;
     }
 
-    public void setVideo(boolean video) {
-        this.video = video;
+    public void setVote_average(double vote_average) {
+        this.vote_average = vote_average;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
+    public int getVote_count() {
+        return vote_count;
     }
 
-    public void setVoteAverage(double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVote_count(int vote_count) {
+        this.vote_count = vote_count;
     }
 
-    public int getVoteCount() {
-        return voteCount;
-    }
 
-    public void setVoteCount(int voteCount) {
-        this.voteCount = voteCount;
-    }
 }
