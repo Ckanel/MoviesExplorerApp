@@ -112,7 +112,7 @@ public class MainActivity extends NetworkCheck {
                     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                         String selectedSortOption = parent.getItemAtPosition(pos).toString();
 
-                        if (selectedSortOption.equals("Sort by Rating")) {
+                        if (selectedSortOption.equals("Top Rated")) {
                             moviesCompare.sort(new Comparator<Movies>() {
                                 @Override
                                 public int compare(Movies o1, Movies o2) {
@@ -120,14 +120,14 @@ public class MainActivity extends NetworkCheck {
                                 }
                             });
 
-                        } else if (selectedSortOption.equals("Sort by Date")) {
+                        } else if (selectedSortOption.equals("Most Recent")) {
                             moviesCompare.sort(new Comparator<Movies>() {
                                 @Override
                                 public int compare(Movies o1, Movies o2) {
-                                    return o1.getRelease_date().compareTo(o2.getRelease_date());
+                                    return o2.getRelease_date().compareTo(o1.getRelease_date());
                                 }
                             });
-                        } else if (selectedSortOption.equals("Sort by Popularity")) {
+                        } else if (selectedSortOption.equals("Most Popular")) {
 
                             moviesCompare.sort(new Comparator<Movies>() {
                                 @Override

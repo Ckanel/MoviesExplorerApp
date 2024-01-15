@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
         <string-array name="sort_options">
-            <item>Sort by Rating</item>
-            <item>Sort by Date</item>
-            <item>Sort by Popularity</item>
+            <item>Top Rated</item>
+            <item>Most Recent</item>
+            <item>Most Popular</item>
         </string-array>
     </resources>
