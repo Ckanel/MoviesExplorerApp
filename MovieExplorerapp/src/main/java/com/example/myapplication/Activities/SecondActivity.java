@@ -9,9 +9,11 @@ import android.content.SharedPreferences;
 import com.example.myapplication.Models.Movies;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -49,12 +51,13 @@ public class SecondActivity extends NetworkCheck {
     private ImageView poster;
     private ImageButton share;
     private ToggleButton favourite;
+    private ProgressBar progressBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // initialize the layout things, like textview for title,imageview for poster etc
         setContentView(R.layout.moviedetails);
-
+        progressBar = findViewById(R.id.progressBar);
         recView3 = findViewById(R.id.recView3);
         title = findViewById(R.id.title);
         prodComp = findViewById(R.id.prodComp);
@@ -81,10 +84,14 @@ public class SecondActivity extends NetworkCheck {
         //call api to fetch movie details
         MyApi api = Api.getAPI();
         Call<MovieDeets> call = api.getMovieDeets(id);
+        //make progress bar visible until response from api arrives
+        progressBar.setVisibility(View.VISIBLE);
 
         call.enqueue(new Callback<MovieDeets>() {
             @Override
             public void onResponse(Call<MovieDeets> call, Response<MovieDeets> response) {
+                // hide the progressbar since we got a response
+                progressBar.setVisibility(View.GONE);
                 if (!response.isSuccessful()) {
                     Toast.makeText(SecondActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                     Log.e("API Error", "Code: " + response.code());

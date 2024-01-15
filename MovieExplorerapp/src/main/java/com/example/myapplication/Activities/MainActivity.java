@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.myapplication.Activities.API.Api;
@@ -38,6 +39,7 @@ public class MainActivity extends NetworkCheck {
     private ImageButton favourite;
     private RecyclerView recView2;
     private Spinner spinner;
+    private ProgressBar progressBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class MainActivity extends NetworkCheck {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         //init the rec viewers and the spinner
         setContentView(R.layout.activity_main);
-
+        progressBar = findViewById(R.id.progressBar);
         recView1 = findViewById(R.id.recView1);
         recView2 = findViewById(R.id.recView2);
         recView1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -77,9 +79,13 @@ public class MainActivity extends NetworkCheck {
         //call api to fetch movies
         MyApi api = Api.getAPI();
         Call<ApiResponse> call = api.getMovies();
+        // show progress bar until we get api response
+        progressBar.setVisibility(View.VISIBLE);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(@NonNull Call<ApiResponse> call,@NonNull Response<ApiResponse> response) {
+                // hide progress bar
+                progressBar.setVisibility(View.GONE);
                 if (!response.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                     Log.e("API Error", "Code: " + response.code());

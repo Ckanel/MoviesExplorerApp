@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
@@ -40,7 +41,7 @@ public class FavouritesActivity extends NetworkCheck {
 
     private ImageButton home;
     private MovieAdapter adapter;
-
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class FavouritesActivity extends NetworkCheck {
         home = findViewById(R.id.tvHome);
         adapter = new MovieAdapter(movies, FavouritesActivity.this);
         rvFavourites.setAdapter(adapter);
+        progressBar = findViewById(R.id.progressBar);
         // in case home button is pressed destroy the activity
         home.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -74,11 +76,15 @@ public class FavouritesActivity extends NetworkCheck {
                 //call api
                 MyApi api = Api.getAPI();
                 Call<MovieDeets> call = api.getMovieDeets(Integer.parseInt(movieID));
+                //load progressbar in case of delays between screens
+                progressBar.setVisibility(View.VISIBLE);
                 call.enqueue(new Callback<MovieDeets>() {
 
 
                     @Override
                     public void onResponse(@NonNull Call<MovieDeets> call, @NonNull Response<MovieDeets> response) {
+                        // make progress bar invisible since we got the api response
+                        progressBar.setVisibility(View.GONE);
                         if (!response.isSuccessful()) {
                             Toast.makeText(FavouritesActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                             Log.e("API Error", "Code: " + response.code());
